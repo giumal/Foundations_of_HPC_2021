@@ -61,6 +61,7 @@
 #include <sys/resource.h>
 
 #define STACKSMASH  8*1024*1024    // <<--- set this to the number of bytes
+// #define STACKSMASH 8192*8
 				   // needed to smash the stack limit
 
 

@@ -227,6 +227,8 @@ char * function_1 ( void )
   char my_statement[] = "this is the statement of function_1()\n";
   printf ( "%s", my_statement );
 
+  //funciton_1 returns the adress of its local variable but it is not more accessible, because it is local
+
   // returning the address of a local variable
   // will make the compiler warning that you are
   // missing some fundamental point..
