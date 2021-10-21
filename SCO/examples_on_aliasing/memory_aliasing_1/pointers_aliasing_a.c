@@ -24,7 +24,7 @@
  │                                                                            │
  * ────────────────────────────────────────────────────────────────────────── */
 
-
+// it tells your compiler to include definitions for some extra functions that are defined in the X/Open and POSIX standards.
 #define _XOPEN_SOURCE 700
 #include <stdlib.h>
 #include <stdio.h>

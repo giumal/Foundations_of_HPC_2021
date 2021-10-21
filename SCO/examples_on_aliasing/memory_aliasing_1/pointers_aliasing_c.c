@@ -23,7 +23,17 @@
  │     along with this program.  If not, see <http://www.gnu.org/licenses/>   │
  │                                                                            │
  * ────────────────────────────────────────────────────────────────────────── */
-
+// ALIGNAS
+// The alignas specifier may be applied to the declaration of a variable or a class data member, 
+// or it can be applied to the definition of a class/struct/union or enum.
+// When used in form alignas(expression), and expression is an integral constant expression that evaluates to a positive value, 
+// the declared entity will have its alignment requirement set to exactly the result of the expression, 
+// except if it would weaken the natural alignment requirement of the type.
+// When used in form alignas(type), is exactly equivalent to alignas(alignof(type)), that is, 
+// the alignment requirement of the declared entity will be equal the alignment requirement of type.
+// ALIGNED_ALLOC
+// void *aligned_alloc( size_t alignment, size_t size );
+// Allocate size bytes of uninitialized storage whose alignment is specified by alignment. The size parameter must be an integral multiple of alignment.
 
 #define _XOPEN_SOURCE 700
 #include <stdlib.h>

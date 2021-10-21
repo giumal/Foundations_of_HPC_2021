@@ -24,6 +24,7 @@
  │                                                                            │
  * ────────────────────────────────────────────────────────────────────────── */
 
+// it tells the compiler that pointer is the only way to access the object pointed by it
 
 #define _XOPEN_SOURCE 700
 #include <stdlib.h>
