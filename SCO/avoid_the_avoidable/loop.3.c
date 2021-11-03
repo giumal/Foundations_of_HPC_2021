@@ -116,22 +116,21 @@ int main(int argc, char **argv)
       tstart = TCPU_TIME;
       
       for ( int p = 0; p < Np; p++ )
-	for ( int i = 0; i < Ng; i++ )
-	  for ( int j = 0; j < Ng; j++ )
-	    for ( int k = 0; k < Ng; k++ )
-	      {
-		double dx, dy, dz;
-		double dx2, dy2, dz2;
-		dx = x[p] - (double)i * Ng_inv + half_size; dx2 = dx*dx;
-		dy = y[p] - (double)j * Ng_inv + half_size; dy2 = dy*dy;
-		dz = z[p] - (double)k * Ng_inv + half_size; dz2 = dz*dz;
-		
-		dist = dx2 + dy2 + dz2;
-		
-		if(dist < Rmax2)
-		  dummy += sqrt(dist);
-	      }
-      
+	      for ( int i = 0; i < Ng; i++ )
+      	  for ( int j = 0; j < Ng; j++ )
+      	    for ( int k = 0; k < Ng; k++ )
+	          {
+              double dx, dy, dz;
+              double dx2, dy2, dz2;
+              dx = x[p] - (double)i * Ng_inv + half_size; dx2 = dx*dx;
+              dy = y[p] - (double)j * Ng_inv + half_size; dy2 = dy*dy;
+              dz = z[p] - (double)k * Ng_inv + half_size; dz2 = dz*dz;
+              
+              dist = dx2 + dy2 + dz2;
+              
+	          	if(dist < Rmax2)
+		            dummy += sqrt(dist);
+	          }
       ctime += TCPU_TIME - tstart;
     }
   

@@ -113,46 +113,46 @@ int main(int argc, char **argv)
   tstart = TCPU_TIME;
 
   for( int p = 0; p < Np3; p += 12 )
-#pragma ivdep    
+    #pragma ivdep    
     for( int i = 0; i < Ng; i++)
+    {
+        double dx2[4] = {(parts[p] - jks[i])*(parts[p] - jks[i]),
+                        (parts[p+1] - jks[i])*(parts[p+1] - jks[i]),
+                        (parts[p+2] - jks[i])*(parts[p+2] - jks[i]),
+                        (parts[p+3] - jks[i])*(parts[p+3] - jks[i]) };
+      #pragma ivdep    
+      for( int j = 0; j < Ng; j++)
       {
-	double dx2[4] = {(parts[p] - jks[i])*(parts[p] - jks[i]),
-			 (parts[p+1] - jks[i])*(parts[p+1] - jks[i]),
-			 (parts[p+2] - jks[i])*(parts[p+2] - jks[i]),
-			 (parts[p+3] - jks[i])*(parts[p+3] - jks[i]) };
-#pragma ivdep    
-	for( int j = 0; j < Ng; j++)
-	  {
-	    double dy2[4] = {(parts[p+4] - jks[j])*(parts[p+4] - jks[j]),
-			     (parts[p+5] - jks[j])*(parts[p+5] - jks[j]),
-			     (parts[p+6] - jks[j])*(parts[p+6] - jks[j]),
-			     (parts[p+7] - jks[j])*(parts[p+7] - jks[j]) };
-	    
-	    double dist2_xy[4] = {dx2[0] + dy2[0],
-				  dx2[1] + dy2[1],
-				  dx2[2] + dy2[2],
-				  dx2[3] + dy2[3] };
-#pragma ivdep    	    
-	    for( int k = 0; k < Ng; k++)
-	      {
-		double dz2[4] = {(parts[p+8] - jks[k])*(parts[p+8] - jks[k]),
-				 (parts[p+9] - jks[k])*(parts[p+9] - jks[k]),
-				 (parts[p+10] - jks[k])*(parts[p+10] - jks[k]),
-				 (parts[p+11] - jks[k])*(parts[p+11] - jks[k]) };
-		
-		double dist2[4] = {dist2_xy[0] + dz2[0],
-				   dist2_xy[1] + dz2[1],
-				   dist2_xy[2] + dz2[2],
-				   dist2_xy[3] + dz2[3]};
+        double dy2[4] = {(parts[p+4] - jks[j])*(parts[p+4] - jks[j]),
+            (parts[p+5] - jks[j])*(parts[p+5] - jks[j]),
+            (parts[p+6] - jks[j])*(parts[p+6] - jks[j]),
+            (parts[p+7] - jks[j])*(parts[p+7] - jks[j]) };
+        
+        double dist2_xy[4] = {dx2[0] + dy2[0],
+            dx2[1] + dy2[1],
+            dx2[2] + dy2[2],
+            dx2[3] + dy2[3] };
+        #pragma ivdep    	    
+        for( int k = 0; k < Ng; k++)
+        {
+          double dz2[4] = {(parts[p+8] - jks[k])*(parts[p+8] - jks[k]),
+              (parts[p+9] - jks[k])*(parts[p+9] - jks[k]),
+              (parts[p+10] - jks[k])*(parts[p+10] - jks[k]),
+              (parts[p+11] - jks[k])*(parts[p+11] - jks[k]) };
+          
+          double dist2[4] = {dist2_xy[0] + dz2[0],
+                dist2_xy[1] + dz2[1],
+                dist2_xy[2] + dz2[2],
+                dist2_xy[3] + dz2[3]};
 
-		int register c;
-#pragma ivdep		
-		for( c = 0; c < 4; c++)
-		  if(dist2[c] < Rmax2)
-		    dummy += sqrt(dist2[c]);
-	      }
-	  }
+          int register c;
+          #pragma ivdep		
+          for( c = 0; c < 4; c++)
+            if(dist2[c] < Rmax2)
+              dummy += sqrt(dist2[c]);
+        }
       }
+    }
 	    
   ctime += TCPU_TIME - tstart;
   
