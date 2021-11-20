@@ -55,20 +55,20 @@ int main ( int argc, char **argv )
   // variable are shared and (thread)private
   //
 
-
+  int data_are_arriving = 10;
   // ....
   //
   
  #pragma omp parallel
   {
-    while( data_are_arriving )       // data_are_arriving should be
-				     // an int whose value is known
-				     // to everybody
+    while( data_are_arriving )      // data_are_arriving should be
+				                            // an int whose value is known
+				                            // to everybody
       {
 
         // you must account for how many
         // iteration have been done in
-	// this loop
+	      // this loop
 	
 	// [1] here somebody receives
 	//     the data (and how many
@@ -79,6 +79,7 @@ int main ( int argc, char **argv )
 	//     "data" is an array of
 	//     integers that is generated
 	//     by getting_data()
+         #pragma omp master
 
 	// [2] threads process the data
 	//     so that each thread process

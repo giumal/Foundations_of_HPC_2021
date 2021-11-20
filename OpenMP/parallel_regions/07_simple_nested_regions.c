@@ -38,6 +38,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <omp.h>
+// export OMP_NESTED = true
+
+// export OMP_NUM_THREADS=2,4
 
 
 int main( int argc, char **argv )
@@ -49,6 +52,7 @@ int main( int argc, char **argv )
     #pragma omp single
     printf("%d threads in the outer parallel region\n", nthreads);
 
+    //every threads open this a new parallel region
     #pragma omp parallel
     {
       int nthreads_inner = omp_get_num_threads();
