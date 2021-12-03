@@ -43,7 +43,8 @@ int main( int argc, char **argv )
 
   for( int i = 0; i < N; i++ ) top_stack[i] = i;
   
-  for( int i = 0; i <= N; i++ ) {
+  // for( int i = 0; i <= N; i++ ) {
+  for( int i = 0; i <= N; i++ ) { // here is the bug
     printf("writing local_array item %d at %p\n", i, local_array+i);
     local_array[i] = (double)i; }
 

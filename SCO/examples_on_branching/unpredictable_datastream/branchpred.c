@@ -34,7 +34,6 @@
 #define TOP (2 << 20)
 #define PIVOT (TOP >> 2)
 
-
 #define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
 		   (double)ts.tv_nsec * 1e-9)
 

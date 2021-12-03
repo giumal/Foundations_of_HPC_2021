@@ -113,18 +113,17 @@ int main(int argc, char **argv)
       double tstart = TCPU_TIME;
       
       for ( int p = 0; p < Np; p++ )
-	for ( int i = 0; i < Ng; i++ )
-	  for ( int j = 0; j < Ng; j++ )
-	    for ( int k = 0; k < Ng; k++ )
-	      {
-		dist = pow(x[p] - (double)i/Ng + half_size, 2) +
-		  pow(y[p] - (double)j/Ng + half_size, 2) +
-		  pow(z[p]  - (double)k/Ng + half_size, 2);
+	      for ( int i = 0; i < Ng; i++ )
+	        for ( int j = 0; j < Ng; j++ )
+	          for ( int k = 0; k < Ng; k++ )
+	          {
+		          dist = pow(x[p] - (double)i/Ng + half_size, 2) +
+		                 pow(y[p] - (double)j/Ng + half_size, 2) +
+		                 pow(z[p] - (double)k/Ng + half_size, 2);
 		
-		if(dist < Rmax2)
-		  dummy += sqrt(dist);
-	      }
-  
+              if(dist < Rmax2)
+                dummy += sqrt(dist);
+            }
       ctime += TCPU_TIME - tstart;
     }
   

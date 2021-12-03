@@ -91,20 +91,20 @@ int main(int argc, char **argv)
       double tstart = TCPU_TIME;
       /* run the experiment */
       for (int cc = 0; cc < NRUNS; cc++)
-	{
-	  PAPI_FLUSH;
-	  PAPI_START_CNTR;
-	  for (int i = 0; i < N; i++)
-	    {
-	      int offset = i*N;
-	      for(int j = 0, acc = 0; j < N; j++, acc+=N)
-		array_swap[acc + i] = array[offset + j];
-	    }
-	  PAPI_STOP_CNTR;
-	  if( cc > 0 )
-	    for( int jj = 0; jj < PAPI_EVENTS_NUM; jj++ )
-	      values[jj] += PAPI_GET_CNTR(jj);
-	}
+      {
+        PAPI_FLUSH;
+        PAPI_START_CNTR;
+        for (int i = 0; i < N; i++)
+          {
+            int offset = i*N;
+            for(int j = 0, acc = 0; j < N; j++, acc+=N)
+        array_swap[acc + i] = array[offset + j];
+          }
+        PAPI_STOP_CNTR;
+        if( cc > 0 )
+          for( int jj = 0; jj < PAPI_EVENTS_NUM; jj++ )
+            values[jj] += PAPI_GET_CNTR(jj);
+      }
       double tstop = (TCPU_TIME - tstart);
       
       printf("size: %d bw: %g cycles: %lld cycles_per_loc: %9.5f L1miss: %lld L1miss_frac: %9.5f L2miss: %lld L2miss_frac: %9.5f\n",
