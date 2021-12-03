@@ -98,13 +98,13 @@ int main(int argc, char **argv)
 	    {
 	      int offset = i*N;
 	      for(int j = 0, acc = 0; j < N; j++, acc+=N)
-		array_swap[offset + j] = array[acc + i];
-	    }
-	  PAPI_STOP_CNTR;
-	  if( cc > 0 )
-	    for( int jj = 0; jj < PAPI_EVENTS_NUM; jj++ )
-	      values[jj] += PAPI_GET_CNTR(jj);
-	}
+        array_swap[offset + j] = array[acc + i];
+      }
+    PAPI_STOP_CNTR;
+    if( cc > 0 )
+    for( int jj = 0; jj < PAPI_EVENTS_NUM; jj++ )
+      values[jj] += PAPI_GET_CNTR(jj);
+  }
       double tstop = (TCPU_TIME - tstart);
       
       printf("size: %d bw: %g cycles: %lld cycles_per_loc: %9.5f L1miss: %lld L1miss_frac: %9.5f L2miss: %lld L2miss_frac: %9.5f\n",
